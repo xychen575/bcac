@@ -38,8 +38,11 @@ Host1 for Replay Traffic<br>Host2 for Replay Traffic<br>Traffic Analysis System 
 TAP Switch | Centec V580-48X6Q-TAP
 
 Details of data playback method:
+
 -The traffic replay module includes steps such as pcap parsing, packet slicing, IP modification, checksum modification, topology reconstruction and replay code. (1)The "pcap parsing" is responsible for the statistics of the collected normal traffic and attack traffic packet files respectively, removing the useless or unrepresentative link packets, leaving N links, and obtaining their source IP list and destination IP list. (2) The "packet splitting " refers to removing packets whose source or destination IPs are not in the IP list parsed in the first step. (3) Modify the source and destination IPs to Mininet intranet environment IPs respectively, while modifying the checksum to make the packets replayable. (4) Finally, according to the source and destination IP lists, generate the corresponding mininet topology and replay code, and run the traffic packet environment on the two high-performance hosts to simulate the real network respectively.
+
 -The traffic collection module uses Centec's V580 TAP series 10GbE collection and shunting device, and after configuring the flow table, the real traffic packets simulated by the two high-performance hosts are copied to the traffic analysis server for subsequent feature extraction and situational awareness analysis.
+
 -We set up the corresponding sampling rate and its feature extraction module. The feature extraction module samples the input traffic according to the algorithm requirements, and then calculates the features according to the feature extraction algorithm and stores them in the corresponding Redis database, which is a high-speed memory database that meets the high concurrency requirements in real time and is suitable for the high traffic feature access scenario of this system.
 
 
